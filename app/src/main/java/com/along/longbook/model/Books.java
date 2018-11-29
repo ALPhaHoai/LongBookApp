@@ -1,4 +1,23 @@
 package com.along.longbook.model;
 
-public class Books {
+import net.minidev.json.JSONArray;
+
+import java.util.ArrayList;
+
+public class Books extends ArrayList<Book> {
+    public JSONArray toJSON() {
+        if (this.size() == 0) return null;
+        else {
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i) != null) jsonArray.add(this.get(i).toJSON());
+            }
+            return jsonArray;
+        }
+    }
+
+    public String toJSONString() {
+        if (this.toJSON() == null) return "";
+        else return this.toJSON().toJSONString();
+    }
 }

@@ -1,6 +1,9 @@
 package com.along.longbook.api;
 
+
 import com.along.longbook.model.Book;
+import com.along.longbook.model.Books;
+import com.along.longbook.model.Categories;
 import com.along.longbook.model.Category;
 
 import net.minidev.json.JSONArray;
@@ -10,10 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
-import java.util.ArrayList;
-
 public class BookApi {
-    private static final String API_ENDPOINT = "http://192.168.0.127:8080/longbookapi/";
+    private static final String API_ENDPOINT = "http://192.168.1.9:8080/longbookapi/";
     public static Book get(String id) {
         if (StringUtils.isNumeric(id) && Integer.valueOf(id) > 0) {
             JSONObject jsonData = Api.getJSON(Jsoup.connect(API_ENDPOINT + "book/" + id));
@@ -25,15 +26,15 @@ public class BookApi {
         } else return null;
     }
 
-    public static ArrayList<Book> getAll() {
+    public static Books getAll() {
         return getAll(0, 10);
     }
 
-    public static ArrayList<Book> getAll(int start) {
+    public static Books getAll(int start) {
         return getAll(start, 10);
     }
 
-    public static ArrayList<Book> getAll(int start, int limit) {
+    public static Books getAll(int start, int limit) {
         if (start < 0 || limit < 0 || limit > 100) return null;
         JSONObject jsonData = Api.getJSON(Jsoup.connect(API_ENDPOINT + "book")
                 .data("start", String.valueOf(start))
@@ -42,15 +43,15 @@ public class BookApi {
         return parserBook(jsonData);
     }
 
-    public static ArrayList<Book> search(String title) {
+    public static Books search(String title) {
         return search(title, null, null, 0, 10);
     }
 
-    public static ArrayList<Book> search(String title, int start, int limit) {
+    public static Books search(String title, int start, int limit) {
         return search(title, null, null, start, limit);
     }
 
-    public static ArrayList<Book> search(String title, String content, int[] categories, int start, int limit) {
+    public static Books search(String title, String content, int[] categories, int start, int limit) {
         if (start < 0 || limit < 0 || limit > 100) return null;
         if (title != null) title = title.trim();
         if (content != null) content = content.trim();
@@ -73,13 +74,13 @@ public class BookApi {
 
     }
 
-    public static ArrayList<Book> parserBook(JSONObject jsonData) {
+    public static Books parserBook(JSONObject jsonData) {
         if (jsonData == null) return null;
         if (jsonData.getAsNumber("status") == null || jsonData.getAsNumber("status").intValue() != 200)
             return null;
         JSONArray result = (JSONArray) jsonData.get("result");
         if (result == null || result.size() == 0) return null;
-        ArrayList<Book> books = new ArrayList<>();
+        Books books = new Books();
         for (int i = 0; i < result.size(); i++) {
             JSONObject o = (JSONObject) result.get(i);
             String retultId = o.getAsString("id");
@@ -94,7 +95,7 @@ public class BookApi {
         return books.size() == 0 ? null : books;
     }
 
-    public static ArrayList<Category> getCategories(String bookId) {
+    public static Categories getCategories(String bookId) {
         Connection con = Jsoup.connect(API_ENDPOINT + "book/" + bookId + "/category")
                 .data("start", "0")
                 .data("limit", "100");
@@ -104,7 +105,7 @@ public class BookApi {
             return null;
         JSONArray result = (JSONArray) jsonData.get("result");
         if (result == null || result.size() == 0) return null;
-        ArrayList<Category> categories = new ArrayList<>();
+        Categories categories = new Categories();
         for (int i = 0; i < result.size(); i++) {
             JSONObject record = (JSONObject) result.get(i);
             categories.add(new Category(record.getAsString("id"), record.getAsString("name")));

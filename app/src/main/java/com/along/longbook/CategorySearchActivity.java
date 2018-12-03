@@ -19,7 +19,7 @@ import com.along.longbook.model.Categories;
 public class CategorySearchActivity extends AppCompatActivity {
     Categories categories = new Categories();
     private RecyclerView mResultList;
-    private MyCateAdapter mAdapter;
+    private CategoryAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +53,23 @@ public class CategorySearchActivity extends AppCompatActivity {
 
             } else {
                 categories = newCategories;
-                mAdapter = new MyCateAdapter(CategorySearchActivity.this, categories);
+                mAdapter = new CategoryAdapter(CategorySearchActivity.this, categories);
                 mResultList.setAdapter(mAdapter);
             }
 
         }
     }
 
-    private class MyCateAdapter extends RecyclerView.Adapter<MyCateAdapter.ViewHolder> {
+    private class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         Context mContext;
 
-        public MyCateAdapter(Context mContext, Categories categories) {
+        public CategoryAdapter(Context mContext, Categories categories) {
             this.mContext = mContext;
         }
 
 
         @Override
-        public MyCateAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public CategoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View bookView = inflater.inflate(R.layout.list_category_item, parent, false);
             return new ViewHolder(bookView);

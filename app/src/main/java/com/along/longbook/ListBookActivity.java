@@ -50,7 +50,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
     private ImageButton mSearchBtn;
 
     private RecyclerView mResultList;
-    private MyCustomAdapter mAdapter;
+    private BookAdapter mAdapter;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -146,7 +146,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         }
 
         if (mAdapter == null || !isAppend) {
-            mAdapter = new MyCustomAdapter(ListBookActivity.this, books);
+            mAdapter = new BookAdapter(ListBookActivity.this, books);
             mResultList.setAdapter(mAdapter);
             mAdapter.setOnBottomReachedListener(new OnBottomReachedListener() {
                 @Override
@@ -214,12 +214,12 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         lastTimeScoll = new Date();
     }
 
-    private class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.ViewHolder> {
+    private class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         private Books books;
         Context mContext;
         OnBottomReachedListener onBottomReachedListener;
 
-        public MyCustomAdapter(Context mContext, Books books) {
+        public BookAdapter(Context mContext, Books books) {
             this.mContext = mContext;
             this.books = books;
         }
@@ -229,7 +229,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         }
 
         @Override
-        public MyCustomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View bookView = inflater.inflate(R.layout.list_book_item, parent, false);
             return new ViewHolder(bookView);

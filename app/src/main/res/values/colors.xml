@@ -7,5 +7,7 @@
     <color name="black">#000</color>
     <color name="lightorange">#fdf2df</color>
     <color name="lightorangedark">#ebd6ab</color>
+    <color name="white">#ffffff</color>
+    <color name="darkgray">#6c6c6c</color>
 
 </resources>

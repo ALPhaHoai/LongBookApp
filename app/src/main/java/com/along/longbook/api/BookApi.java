@@ -15,6 +15,7 @@ import org.jsoup.Jsoup;
 
 public class BookApi {
     private static final String API_ENDPOINT = "http://192.168.1.9:8080/longbookapi/";
+
     public static Book get(String id) {
         if (StringUtils.isNumeric(id) && Integer.valueOf(id) > 0) {
             JSONObject jsonData = Api.getJSON(Jsoup.connect(API_ENDPOINT + "book/" + id));
@@ -99,8 +100,18 @@ public class BookApi {
         Connection con = Jsoup.connect(API_ENDPOINT + "book/" + bookId + "/category")
                 .data("start", "0")
                 .data("limit", "100");
-        JSONObject jsonData = Api.getJSON(con);
+        return parserCategory(Api.getJSON(con));
+    }
 
+    public static Categories getCategories() {
+        Connection con = Jsoup.connect(API_ENDPOINT + "category")
+                .data("start", "0")
+                .data("limit", "100");
+        return parserCategory(Api.getJSON(con));
+
+    }
+
+    public static Categories parserCategory(JSONObject jsonData) {
         if (jsonData == null || jsonData.getAsNumber("status") == null || jsonData.getAsNumber("status").intValue() != 200)
             return null;
         JSONArray result = (JSONArray) jsonData.get("result");
@@ -110,6 +121,6 @@ public class BookApi {
             JSONObject record = (JSONObject) result.get(i);
             categories.add(new Category(record.getAsString("id"), record.getAsString("name")));
         }
-        return categories;
+        return categories.size() == 0 ? null : categories;
     }
 }

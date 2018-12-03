@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
-public class BookApi {
+public class MainApi {
     private static final String API_ENDPOINT = "http://192.168.1.9:8080/longbookapi/";
 
     public static Book get(String id) {

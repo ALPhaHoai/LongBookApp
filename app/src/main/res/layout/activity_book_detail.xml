@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -17,12 +17,15 @@
         android:layout_marginRight="8dp"
         android:fontFamily="@font/nunito_semibold"
         android:text="Title"
-        android:textColor="#555555" />
+        android:textColor="#555555"
+        android:ellipsize="end"
+        android:lines="2"
+        />
 
     <TextView
         android:id="@+id/categories"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -31,7 +34,10 @@
         android:layout_marginRight="8dp"
         android:fontFamily="@font/nunito_semibold"
         android:text="Categories"
-        android:textColor="#555555" />
+        android:textColor="#555555"
+        android:ellipsize="end"
+        android:lines="2"
+        />
 
     <TextView
         android:id="@+id/content"

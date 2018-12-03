@@ -15,7 +15,10 @@
         android:fontFamily="@font/nunito_semibold"
         android:text="Title"
         android:textColor="#555555"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:lines="1"
+        />
 
     <TextView
         android:id="@+id/content_text"
@@ -28,5 +31,8 @@
         android:fontFamily="@font/nunito_semibold"
         android:text="Content"
         android:textColor="#999999"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:lines="4"
+        />
 </RelativeLayout>

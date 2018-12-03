@@ -1,4 +1,4 @@
-#Mon Dec 03 14:25:52 ICT 2018
+#Mon Dec 03 16:24:01 ICT 2018
 base.0=D\:\\MyProjects\\JavaProjects\\AndroidStudioProjects\\LongBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

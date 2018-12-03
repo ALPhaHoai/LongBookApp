@@ -282,7 +282,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
             public void setBook(Book book, int position) {
 //                this.title.setText(book.getId() + ". " + book.getTitle());//debug purpose
                 this.title.setText(String.valueOf((position + 1)) + ". " + book.getTitle());
-                this.content.setText(book.getContent().length() > 300 ? book.getContent().substring(0, 300) + "..." : book.getContent());
+                this.content.setText(book.getContent());
             }
 
             public void setItemClickListener(ItemClickListener itemClickListener) {

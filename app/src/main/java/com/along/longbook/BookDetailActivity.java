@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.api.BookApi;
+import com.along.longbook.api.MainApi;
 import com.along.longbook.model.Book;
 import com.along.longbook.model.Category;
 
@@ -52,8 +52,8 @@ public class BookDetailActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            book = BookApi.get(bookId);
-            categories = BookApi.getCategories(bookId);
+            book = MainApi.get(bookId);
+            categories = MainApi.getCategories(bookId);
             return null;
         }
 

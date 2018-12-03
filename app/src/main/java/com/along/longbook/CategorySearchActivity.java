@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.api.BookApi;
+import com.along.longbook.api.MainApi;
 import com.along.longbook.model.Categories;
 
 public class CategorySearchActivity extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class CategorySearchActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            newCategories = BookApi.getCategories();
+            newCategories = MainApi.getCategories();
             return null;
         }
 

@@ -24,7 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.api.BookApi;
+import com.along.longbook.api.MainApi;
 import com.along.longbook.model.Book;
 import com.along.longbook.model.Books;
 
@@ -177,7 +177,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
 
         @Override
         protected String doInBackground(String... params) {
-            newBooks = (searchText == null || searchText.length() == 0) ? BookApi.getAll(start, limit) : BookApi.search(searchText, start, limit);
+            newBooks = (searchText == null || searchText.length() == 0) ? MainApi.getAll(start, limit) : MainApi.search(searchText, start, limit);
             return null;
         }
 

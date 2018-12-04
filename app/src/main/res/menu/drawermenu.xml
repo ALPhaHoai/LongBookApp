@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Thể loại"
-        android:id="@+id/category"
-        android:icon="@mipmap/category" >
-    </item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="nav_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/category"
+            android:checkableBehavior="single"
+            android:icon="@mipmap/category"
+            android:title="Thể loại"></item>
+    </group>
 </menu>

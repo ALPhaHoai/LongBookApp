@@ -633,6 +633,7 @@ color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
+color divider
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -1072,6 +1073,7 @@ id auto
 id barrier
 id beginning
 id blocking
+id book_item
 id bottom
 id buttonPanel
 id cate_name
@@ -1248,6 +1250,7 @@ id up
 id useLogo
 id view_offset_helper
 id visible
+id vw_divider
 id withText
 id wrap
 id wrap_content
@@ -1380,12 +1383,12 @@ string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_pattern
-string close
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string mtrl_chip_close_icon_content_description
-string open
+string navigation_drawer_close
+string navigation_drawer_open
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through

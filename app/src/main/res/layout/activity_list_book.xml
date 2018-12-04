@@ -8,19 +8,6 @@
     android:background="@color/white"
     tools:context=".ListBookActivity">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        app:itemIconTint="@color/darkgray"
-        app:itemTextColor="@color/darkgray"
-        app:menu="@menu/drawermenu" >
-    </android.support.design.widget.NavigationView>
-
 
     <LinearLayout
         android:gravity="center_horizontal"
@@ -79,5 +66,18 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/search_field"
         android:layout_marginTop="80dp"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:itemIconTint="@color/darkgray"
+        app:itemTextColor="@color/darkgray"
+        app:menu="@menu/drawermenu" >
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

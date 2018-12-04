@@ -9,5 +9,6 @@
     <color name="lightorangedark">#ebd6ab</color>
     <color name="white">#ffffff</color>
     <color name="darkgray">#6c6c6c</color>
+    <color name="divider">#d9d6d6</color>
 
 </resources>

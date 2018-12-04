@@ -2,6 +2,7 @@ package com.along.longbook;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,11 +34,14 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -73,7 +77,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_list_book);
         ButterKnife.bind(this);
 
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,6 +87,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
 
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
+
 
         if (getIntent().hasExtra("category")) {
             category = (Category) getIntent().getSerializableExtra("category");
@@ -112,6 +117,18 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();  // Always call the superclass method first
+//        Toast.makeText(this, "Resume", Toast.LENGTH_SHORT).show();
+
+        ArrayList<String> readBooks = loadRead();
+        for (String book : readBooks) {
+            View v = mResultList.getLayoutManager().findViewByPosition(getPosition(Integer.valueOf(book)));
+            if(v != null) v.setBackgroundColor(Color.LTGRAY);
+        }
     }
 
     //start from 1 -> size
@@ -278,6 +295,7 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
                     //Save current book status
                     saveLastStatus(books.get(position).getIdInt());
 
+                    saveLastStatus(-1, books.get(position).getIdInt());
                     //go to book detail
                     Intent intent = new Intent(ListBookActivity.this, BookDetailActivity.class);
                     intent.putExtra("bookId", books.get(position).getId());
@@ -298,16 +316,24 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
             public TextView content;
             ItemClickListener itemClickListener;
             public RelativeLayout parentLayout;
+            public RelativeLayout bookItemLayout;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 title = (TextView) itemView.findViewById(R.id.title_text);
                 content = (TextView) itemView.findViewById(R.id.content_text);
                 parentLayout = (RelativeLayout) itemView.findViewById(R.id.parent_layout);
+                bookItemLayout = (RelativeLayout) itemView.findViewById(R.id.book_item);
                 itemView.setOnClickListener(this); // Mấu chốt ở đây , set sự kiên onClick cho View
             }
 
             public void setBook(Book book, int position) {
+                ArrayList<String> oldBooks = loadRead();
+                if (oldBooks.contains(book.getId())) {
+                    this.bookItemLayout.setBackgroundColor(Color.LTGRAY);
+                } else {
+                    this.bookItemLayout.setBackgroundColor(Color.WHITE);
+                }
 //                this.title.setText(book.getId() + ". " + book.getTitle());//debug purpose
                 this.title.setText(String.valueOf((position + 1)) + ". " + book.getTitle());
                 this.content.setText(book.getContent());
@@ -335,6 +361,10 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
     }
 
     public void saveLastStatus(int bookId) {
+        saveLastStatus(bookId, -1);
+    }
+
+    public void saveLastStatus(int bookId, int read) {
         JSONObject data = new JSONObject();
         if (books != null && books.size() > 0) {
             data.put("books", books.toJSON());
@@ -344,8 +374,20 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         data.put("last_book", lastBookId);
         data.put("last_start", start);
         data.put("last_search", searchText);
-        if(category != null)
-        data.put("category", category.toJSON());
+        if (category != null)
+            data.put("category", category.toJSON());
+
+
+        ArrayList<String> oldRead = loadRead();
+        if (read >= 0) {
+            if (!oldRead.contains(String.valueOf(read))) oldRead.add(String.valueOf(read));
+        }
+        String readStr = "";
+        for (int j = 0; j < oldRead.size(); j++) {
+            readStr += oldRead.get(j);
+            if (j < oldRead.size() - 1) readStr += ",";
+        }
+        if (!readStr.equals("")) data.put("read", readStr);
 
         FileOutputStream fos = null;
         try {
@@ -361,6 +403,44 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public ArrayList<String> loadRead() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(HISTORY_FILE);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+            JSONObject data = (JSONObject) JSONValue.parse(sb.toString().trim());
+            if (data == null || data.get("read") == null) return new ArrayList<>();
+            String[] reads = data.getAsString("read").split(",");
+
+            ArrayList<String> readArray = new ArrayList<>();
+            for (int j = 0; j < reads.length; j++) {
+                if (!StringUtils.isNumeric(reads[j])) continue;
+                if (!readArray.contains(reads[j])) readArray.add(reads[j]);
+            }
+            return readArray;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 

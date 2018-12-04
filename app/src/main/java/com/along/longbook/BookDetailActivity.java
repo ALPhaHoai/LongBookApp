@@ -1,5 +1,6 @@
 package com.along.longbook;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +47,15 @@ public class BookDetailActivity extends AppCompatActivity {
             bookTitle = getIntent().getSerializableExtra("bookTitle").toString();
         }
 
-
         new GetBookDetail().execute();
+    }
+
+    public void onBackPressed() {
+        Intent openMainActivity = new Intent(BookDetailActivity.this, ListBookActivity.class);
+        openMainActivity.putExtra("update_readed", book.getId());
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        finish();
     }
 
     private class GetBookDetail extends AsyncTask<String, String, String> {
@@ -70,11 +78,11 @@ public class BookDetailActivity extends AppCompatActivity {
             } else {
                 titleTextView.setText(book.getTitle());
                 contentTextView.setText(book.getContent());
-                if(categories != null && categories.size() > 0){
+                if (categories != null && categories.size() > 0) {
                     categoriesTextView.setText("Thể loại: ");
-                    for(int i = 0; i < categories.size() ; i++) {
+                    for (int i = 0; i < categories.size(); i++) {
                         categoriesTextView.append(categories.get(i).getName());
-                        if(i < categories.size() - 1) categoriesTextView.append(", ");
+                        if (i < categories.size() - 1) categoriesTextView.append(", ");
                     }
                 } else {
                     categoriesTextView.setVisibility(View.INVISIBLE);

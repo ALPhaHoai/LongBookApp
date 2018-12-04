@@ -15,6 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class BookDetailActivity extends AppCompatActivity {
     private Book book;
     private ArrayList<Category> categories;
@@ -22,12 +25,18 @@ public class BookDetailActivity extends AppCompatActivity {
     private String bookId;//id of book from previous activity
     private String bookTitle;//title of book from previous activity
 
-    private TextView titleTextView, contentTextView, categoriesTextView;
+    @BindView(R.id.title)
+    TextView titleTextView;
+    @BindView(R.id.content)
+    TextView contentTextView;
+    @BindView(R.id.categories)
+    TextView categoriesTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+        ButterKnife.bind(this);
 
         if (!getIntent().hasExtra("bookId")) return;
         bookId = getIntent().getSerializableExtra("bookId").toString();
@@ -37,9 +46,6 @@ public class BookDetailActivity extends AppCompatActivity {
             bookTitle = getIntent().getSerializableExtra("bookTitle").toString();
         }
 
-        titleTextView = findViewById(R.id.title);
-        contentTextView = findViewById(R.id.content);
-        categoriesTextView = findViewById(R.id.categories);
 
         new GetBookDetail().execute();
     }

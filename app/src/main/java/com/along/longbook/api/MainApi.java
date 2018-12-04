@@ -14,7 +14,8 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 public class MainApi {
-    private static final String API_ENDPOINT = "http://192.168.1.9:8080/longbookapi/";
+    private static final String API_ENDPOINT = "http://192.168.0.127:8080/longbookapi/";
+//    private static final String API_ENDPOINT = "http://192.168.1.9:8080/longbookapi/";
 
     public static Book get(String id) {
         if (StringUtils.isNumeric(id) && Integer.valueOf(id) > 0) {
@@ -38,6 +39,15 @@ public class MainApi {
     public static Books getAll(int start, int limit) {
         if (start < 0 || limit < 0 || limit > 100) return null;
         JSONObject jsonData = Api.getJSON(Jsoup.connect(API_ENDPOINT + "book")
+                .data("start", String.valueOf(start))
+                .data("limit", String.valueOf(limit))
+        );
+        return parserBook(jsonData);
+    }
+
+    public static Books getAllHasCate(int cateId, int start, int limit) {
+        if (start < 0 || limit < 0 || limit > 100) return null;
+        JSONObject jsonData = Api.getJSON(Jsoup.connect(API_ENDPOINT + "category/" + cateId + "/book")
                 .data("start", String.valueOf(start))
                 .data("limit", String.valueOf(limit))
         );

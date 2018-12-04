@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.along.longbook.api.MainApi;
 import com.along.longbook.model.Book;
 import com.along.longbook.model.Books;
+import com.along.longbook.model.Category;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -39,31 +40,39 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ListBookActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String HISTORY_FILE = "history.txt";
     int start = 0, limit = 10, lastBookId = -1, lastStart = -1;
     Books books = new Books(), oldBooks = new Books();
     Date lastTimeScoll;
 
-    private EditText mSearchField;
-    private String searchText = null;
-    private ImageButton mSearchBtn;
+    Category category;
 
-    private RecyclerView mResultList;
-    private BookAdapter mAdapter;
+    @BindView(R.id.search_field)
+    EditText mSearchField;
+    @BindView(R.id.cate_name)
+    TextView CateName;
+    String searchText = null;
+    @BindView(R.id.search_btn)
+    ImageButton mSearchBtn;
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+    @BindView(R.id.result_list)
+    RecyclerView mResultList;
+    BookAdapter mAdapter;
+
+    @BindView(R.id.parent_layout)
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_book);
+        ButterKnife.bind(this);
 
-        mSearchField = (EditText) findViewById(R.id.search_field);
-        mSearchBtn = (ImageButton) findViewById(R.id.search_btn);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.parent_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -72,11 +81,20 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mResultList = (RecyclerView) findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
 
+        if (getIntent().hasExtra("category")) {
+            category = (Category) getIntent().getSerializableExtra("category");
+        }
+
         loadLastStatus();
+
+        if (category != null) {
+            CateName.setText("Thể loại: " + category.getName());
+            mSearchField.setText("");
+        } else CateName.setVisibility(View.GONE);
+
         new GetBooks(true).execute();
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +143,9 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void doSearch() {
+        category = null;
+        CateName.setVisibility(View.GONE);
+
         books = new Books();
         start = 0;
         searchText = mSearchField.getText().toString().trim();
@@ -132,10 +153,11 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void addBook(Books newBooks, boolean isAppend) {
+//        Toast.makeText(this, "addBook " + isAppend, Toast.LENGTH_SHORT).show();
         Log.d("addBook", "addBook: " + isAppend);
         if (newBooks == null || newBooks.size() == 0) return;
 
-        if(isAppend){
+        if (isAppend) {
             for (Book newBook : newBooks) {
                 if (getPosition(newBook.getIdInt()) == -1) {
                     books.add(newBook);
@@ -177,7 +199,11 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
 
         @Override
         protected String doInBackground(String... params) {
-            newBooks = (searchText == null || searchText.length() == 0) ? MainApi.getAll(start, limit) : MainApi.search(searchText, start, limit);
+            if (category != null)
+                newBooks = MainApi.getAllHasCate(category.getIdInt(), start, limit);
+            else if ((searchText == null || searchText.length() == 0))
+                newBooks = MainApi.getAll(start, limit);
+            else newBooks = MainApi.search(searchText, start, limit);
             return null;
         }
 
@@ -199,15 +225,16 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
                         scrollToPosition(getPosition(lastBookId));
                     }
                 }
-                if (!this.isFirstTime) start += limit;
+                start += limit;
             }
 
-            if (!isFirstTime) saveLastStatus(-1);
+            saveLastStatus(-1);
         }
     }
+
     private void scrollToPosition(int position) {
         if (position < 0) return;
-        if (lastTimeScoll != null && new Date().getTime() - lastTimeScoll.getTime() < 2 * 1000)//2 sec
+        if (lastTimeScoll != null && new Date().getTime() - lastTimeScoll.getTime() < 3 * 1000)//2 sec
             return;
 //        Toast.makeText(this, "scrollToPosition: " + position, Toast.LENGTH_SHORT).show();
         mResultList.scrollToPosition(position);
@@ -259,7 +286,8 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
                 }
             });
 
-            if (books != null && books.size() > 3 && position >= books.size() - 5) {
+            if (books != null && books.size() > 5 && position >= books.size() - 5) {
+//                Toast.makeText(getBaseContext(), "onBottomReachedListener", Toast.LENGTH_SHORT).show();
                 onBottomReachedListener.onBottomReached(position);
             }
 
@@ -316,6 +344,8 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
         data.put("last_book", lastBookId);
         data.put("last_start", start);
         data.put("last_search", searchText);
+        if(category != null)
+        data.put("category", category.toJSON());
 
         FileOutputStream fos = null;
         try {
@@ -355,6 +385,10 @@ public class ListBookActivity extends AppCompatActivity implements NavigationVie
             if (data.getAsString("last_search") != null && data.getAsString("last_search").length() > 0) {
                 searchText = data.getAsString("last_search");
                 mSearchField.setText(searchText);
+            }
+            if (this.category == null && data.get("category") != null) {
+                JSONObject cateObjecty = (JSONObject) data.get("category");
+                this.category = new Category(cateObjecty.getAsString("id"), cateObjecty.getAsString("name"));
             }
 
             JSONArray booksJSONArray = (JSONArray) data.get("books");

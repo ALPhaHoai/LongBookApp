@@ -1,6 +1,7 @@
 package com.along.longbook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,22 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.along.longbook.api.MainApi;
 import com.along.longbook.model.Categories;
+import com.along.longbook.model.Category;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CategorySearchActivity extends AppCompatActivity {
     Categories categories = new Categories();
-    private RecyclerView mResultList;
-    private CategoryAdapter mAdapter;
+    @BindView(R.id.category_list)
+    RecyclerView mResultList;
+    CategoryAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_search);
+        ButterKnife.bind(this);
 
-        mResultList = (RecyclerView) findViewById(R.id.category_list);
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
 
@@ -88,13 +93,13 @@ public class CategorySearchActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View view, int position, boolean b) {
-                    Toast.makeText(getBaseContext(), "Clicked to category " + categories.get(position).getName(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getBaseContext(), "Clicked to category " + categories.get(position).getName(), Toast.LENGTH_LONG).show();
 
-                    /*//go to book detail
-                    Intent intent = new Intent(ListBookActivity.this, BookDetailActivity.class);
-                    intent.putExtra("bookId", books.get(position).getId());
-                    intent.putExtra("bookTitle", books.get(position).getTitle());
-                    startActivity(intent);*/
+                    //go to book detail
+                    Intent intent = new Intent(CategorySearchActivity.this, ListBookActivity.class);
+                    Category category = categories.get(position);
+                    intent.putExtra("category", category);
+                    startActivity(intent);
                 }
             });
 

@@ -1,13 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
+ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\e0fdc356e3cb4704e97933de56ec8ddc\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\cf9f92fcc8dcea440a2567b042990171\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\99015a96a7227214a142d2a918f46c64\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\87910f1decdc441757c21402b4fc67cf\AndroidManifest.xml:17:1-22:12
+MERGED from [com.jakewharton:butterknife:8.8.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\1e48e5da86b6583e1f73ef36d3bba6b1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\195a3b2e3746f99d6534b4c1fd45a209\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\84b912178b24b43e76b04cf60f264f65\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\6248ca827f7d6a85f5dabc242a61f430\AndroidManifest.xml:17:1-22:12
@@ -26,7 +27,6 @@ MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Long\.gradle\ca
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\62b1206f9ca2eb68f69125ec595bf666\AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\62b07df921382ebf7010a0f1fd02fb2b\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\3c211c22f364085be305fecbbca808bc\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\4f1da4afd538b273c3b28f81155d5d7c\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\d820dca19c42c4317b5ab4707dda9c57\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\6fa0b45eb57cf618344fa7bac539a37f\AndroidManifest.xml:17:1-22:12
@@ -35,20 +35,21 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Long\.gradle\cach
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\7d08883c046b9478ea20d2bdc92e51bc\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\275c061c1f2b602123d746d5ff94f784\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0c104c82943aa4cc44e4d4bd89de29ce\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
 	package
 		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:3:5-33
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
-		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
+		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
-		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-34:12
+		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:1-28:12
 		INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:2:11-69
@@ -57,7 +58,7 @@ ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\mai
 	android:name
 		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:7:5-32:19
+ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:7:5-26:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\e0fdc356e3cb4704e97933de56ec8ddc\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\e0fdc356e3cb4704e97933de56ec8ddc\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\99015a96a7227214a142d2a918f46c64\AndroidManifest.xml:9:5-20
@@ -95,19 +96,17 @@ ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\mai
 	android:name
 		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:18:27-74
 activity#com.along.longbook.ListBookActivity
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:21:9-25:20
+ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:21:9-22:20
 	android:name
 		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:21:19-51
-intent-filter#category:name:android.intent.category.LAUNCHER
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:22:13-24:29
 activity#com.along.longbook.CategorySearchActivity
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:26:9-30:20
+ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:23:9-24:20
 	android:name
-		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:26:19-57
+		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:23:19-57
 activity#com.along.longbook.BookDetailActivity
-ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:31:9-56
+ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:25:9-56
 	android:name
-		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:31:19-53
+		ADDED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml:25:19-53
 uses-sdk
 INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
@@ -120,6 +119,8 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Lo
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\99015a96a7227214a142d2a918f46c64\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\87910f1decdc441757c21402b4fc67cf\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\87910f1decdc441757c21402b4fc67cf\AndroidManifest.xml:20:5-44
+MERGED from [com.jakewharton:butterknife:8.8.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\1e48e5da86b6583e1f73ef36d3bba6b1\AndroidManifest.xml:5:5-43
+MERGED from [com.jakewharton:butterknife:8.8.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\1e48e5da86b6583e1f73ef36d3bba6b1\AndroidManifest.xml:5:5-43
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\195a3b2e3746f99d6534b4c1fd45a209\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\195a3b2e3746f99d6534b4c1fd45a209\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\84b912178b24b43e76b04cf60f264f65\AndroidManifest.xml:20:5-44
@@ -156,8 +157,6 @@ MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Long\.gradle\cac
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\62b07df921382ebf7010a0f1fd02fb2b\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\3c211c22f364085be305fecbbca808bc\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\3c211c22f364085be305fecbbca808bc\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\4f1da4afd538b273c3b28f81155d5d7c\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\4f1da4afd538b273c3b28f81155d5d7c\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\d820dca19c42c4317b5ab4707dda9c57\AndroidManifest.xml:20:5-44
@@ -174,6 +173,8 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Long\.gradle\c
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\275c061c1f2b602123d746d5ff94f784\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0c104c82943aa4cc44e4d4bd89de29ce\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0c104c82943aa4cc44e4d4bd89de29ce\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Long\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\badde7eb17130c6bea6bc373379b5aea\AndroidManifest.xml:20:5-44
 INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 INJECTED from D:\MyProjects\JavaProjects\AndroidStudioProjects\LongBook\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion

@@ -1074,6 +1074,7 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
+id cate_name
 id categories
 id category
 id category_list

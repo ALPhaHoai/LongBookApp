@@ -25,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookDetailActivity extends AppCompatActivity implements BaseClient {
-    private ArrayList<Category> categories;
-
     private String bookId;//id of book from previous activity
     private String bookTitle;//title of book from previous activity
 

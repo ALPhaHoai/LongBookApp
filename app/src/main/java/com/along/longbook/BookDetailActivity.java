@@ -10,13 +10,11 @@ import android.widget.Toast;
 import com.along.longbook.apiservice.BaseClient;
 import com.along.longbook.apiservice.BookClient;
 import com.along.longbook.model.Book;
-import com.along.longbook.model.Category;
 import com.along.longbook.model.SingleBookResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,17 +70,22 @@ public class BookDetailActivity extends AppCompatActivity implements BaseClient 
             public void onResponse(Call<SingleBookResponse> call, Response<SingleBookResponse> response) {
                 if (response.isSuccessful()) {
                     Book book = response.body().getBook();
-                    titleTextView.setText(book.getTitle());
-                    contentTextView.setText(book.getContent());
-                    if (book.getCategory() != null && book.getCategory().size() > 0) {
-                        categoriesTextView.setText("Thể loại: ");
-                        for (int i = 0; i < book.getCategory().size(); i++) {
-                            categoriesTextView.append(book.getCategory().get(i).getName());
-                            if (i < book.getCategory().size() - 1) categoriesTextView.append(", ");
+                    if ((book != null)) {
+                        titleTextView.setText(book.getTitle());
+                        contentTextView.setText(book.getContent());
+                        if (book.getCategory() != null && book.getCategory().size() > 0) {
+                            categoriesTextView.setText("Thể loại: ");
+                            for (int i = 0; i < book.getCategory().size(); i++) {
+                                categoriesTextView.append(book.getCategory().get(i).getName());
+                                if (i < book.getCategory().size() - 1) categoriesTextView.append(", ");
+                            }
+                        } else {
+                            categoriesTextView.setVisibility(View.INVISIBLE);
                         }
                     } else {
-                        categoriesTextView.setVisibility(View.INVISIBLE);
+                        Toast.makeText(BookDetailActivity.this, "Can't get book " + bookTitle, Toast.LENGTH_SHORT).show();
                     }
+
                 } else {
                     try {
                         Toast.makeText(BookDetailActivity.this, "Error: " + response.errorBody().string(), Toast.LENGTH_SHORT).show();

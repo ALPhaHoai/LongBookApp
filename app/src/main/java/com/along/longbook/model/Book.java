@@ -1,45 +1,39 @@
 package com.along.longbook.model;
 
-import net.minidev.json.JSONObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
-    private String id;
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("category")
+    @Expose
+    private List<Category> category = null;
+    @SerializedName("content")
+    @Expose
     private String content;
 
-    private Categories categories;
-
-    public Book(String id, String title, String content) {
+    public Book(Integer id) {
+        this.id = id;
+    }
+    public Book(Integer id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
     }
 
-    public Book() {
-    }
-
-    public Book(String id) {
-        this.id = id;
-    }
-
-    public Book(int id) {
-        this.id = String.valueOf(id);
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
-    public int getIdInt() {
-        if(StringUtils.isNumeric(id)) return Integer.valueOf(id);
-        else return -1;
-    }
 
-
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,6 +45,14 @@ public class Book {
         this.title = title;
     }
 
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
+
     public String getContent() {
         return content;
     }
@@ -59,20 +61,4 @@ public class Book {
         this.content = content;
     }
 
-    public ArrayList<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Categories categories) {
-        this.categories = categories;
-    }
-
-    public JSONObject toJSON() {
-        JSONObject jsonObject = new JSONObject()
-                .appendField("id", getIdInt())
-                .appendField("title", getTitle())
-                .appendField("content", getContent());
-        if (categories != null) jsonObject.put("category", categories.toJSON());
-        return jsonObject;
-    }
 }

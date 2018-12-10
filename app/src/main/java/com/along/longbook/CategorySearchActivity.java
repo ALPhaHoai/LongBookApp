@@ -2,7 +2,6 @@ package com.along.longbook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,19 +11,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.along.longbook.api.MainApi;
-import com.along.longbook.model.Categories;
+import com.along.longbook.apiservice.BaseClient;
+import com.along.longbook.apiservice.CategoryClient;
 import com.along.longbook.model.Category;
+import com.along.longbook.model.MultiCategoryResponse;
+
+import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class CategorySearchActivity extends AppCompatActivity {
-    Categories categories = new Categories();
+public class CategorySearchActivity extends AppCompatActivity implements BaseClient {
     @BindView(R.id.category_list)
     RecyclerView mResultList;
     CategoryAdapter mAdapter;
+
+    CategoryClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,41 +43,45 @@ public class CategorySearchActivity extends AppCompatActivity {
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
 
-        new GetCategories().execute();
+        client = retrofit.create(CategoryClient.class);
+
+
+        getCategories();
     }
 
-    private class GetCategories extends AsyncTask<String, String, String> {
-        Categories newCategories;
+    private void getCategories() {
+        Call<MultiCategoryResponse> call = client.getAllCategory();
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            newCategories = MainApi.getCategories();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            if (newCategories == null || newCategories.size() == 0) {
-
-            } else {
-                categories = newCategories;
-                mAdapter = new CategoryAdapter(CategorySearchActivity.this, categories);
-                mResultList.setAdapter(mAdapter);
+        call.enqueue(new Callback<MultiCategoryResponse>() {
+            @Override
+            public void onResponse(Call<MultiCategoryResponse> call, Response<MultiCategoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Category> categories = response.body().getCategory();
+                    mAdapter = new CategoryAdapter(CategorySearchActivity.this, categories);
+                    mResultList.setAdapter(mAdapter);
+                } else {
+                    try {
+                        Toast.makeText(CategorySearchActivity.this, "Error: " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(CategorySearchActivity.this, "Error: unknown " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
 
-        }
+            @Override
+            public void onFailure(Call<MultiCategoryResponse> call, Throwable t) {
+                Toast.makeText(CategorySearchActivity.this, "Fail: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         Context mContext;
+        List<Category> categories;
 
-        public CategoryAdapter(Context mContext, Categories categories) {
+        public CategoryAdapter(Context mContext, List<Category> categories) {
             this.mContext = mContext;
+            this.categories = categories;
         }
 
 
@@ -98,7 +110,8 @@ public class CategorySearchActivity extends AppCompatActivity {
                     //go to book detail
                     Intent intent = new Intent(CategorySearchActivity.this, ListBookActivity.class);
                     Category category = categories.get(position);
-                    intent.putExtra("category", category);
+                    intent.putExtra("categoryId", category.getId());
+                    intent.putExtra("categoryName", category.getName());
                     startActivity(intent);
                 }
             });

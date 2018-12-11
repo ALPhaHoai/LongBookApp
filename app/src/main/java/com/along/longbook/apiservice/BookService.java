@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface BookClient {
+public interface BookService {
 
     @GET("book/{book_id}")
     Call<SingleBookResponse> getBook(@Path("book_id") String bookId);

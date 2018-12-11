@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.apiservice.BaseClient;
-import com.along.longbook.apiservice.BookClient;
+import com.along.longbook.apiservice.BaseService;
+import com.along.longbook.apiservice.BookService;
 import com.along.longbook.model.Book;
 import com.along.longbook.model.SingleBookResponse;
 
@@ -22,11 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookDetailActivity extends AppCompatActivity implements BaseClient {
+public class BookDetailActivity extends AppCompatActivity implements BaseService {
     private String bookId;//id of book from previous activity
     private String bookTitle;//title of book from previous activity
 
-    BookClient client;
+    BookService client;
 
     @BindView(R.id.title)
     TextView titleTextView;
@@ -49,7 +49,7 @@ public class BookDetailActivity extends AppCompatActivity implements BaseClient 
             bookTitle = getIntent().getSerializableExtra("bookTitle").toString();
         }
 
-        client = retrofit.create(BookClient.class);
+        client = retrofit.create(BookService.class);
 
         getBookDetail(bookId);
     }

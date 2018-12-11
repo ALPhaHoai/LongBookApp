@@ -13,8 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.apiservice.BaseClient;
-import com.along.longbook.apiservice.CategoryClient;
+import com.along.longbook.apiservice.BaseService;
+import com.along.longbook.apiservice.CategoryService;
 import com.along.longbook.model.Category;
 import com.along.longbook.model.MultiCategoryResponse;
 
@@ -27,12 +27,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategorySearchActivity extends AppCompatActivity implements BaseClient {
+public class CategorySearchActivity extends AppCompatActivity implements BaseService {
     @BindView(R.id.category_list)
     RecyclerView mResultList;
     CategoryAdapter mAdapter;
 
-    CategoryClient client;
+    CategoryService client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class CategorySearchActivity extends AppCompatActivity implements BaseCli
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
 
-        client = retrofit.create(CategoryClient.class);
+        client = retrofit.create(CategoryService.class);
 
 
         getCategories();

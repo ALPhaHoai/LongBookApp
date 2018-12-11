@@ -24,8 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.along.longbook.apiservice.BaseClient;
-import com.along.longbook.apiservice.BookClient;
+import com.along.longbook.apiservice.BaseService;
+import com.along.longbook.apiservice.BookService;
 import com.along.longbook.hekper.ErrorUntils;
 import com.along.longbook.model.Book;
 import com.along.longbook.model.Category;
@@ -50,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListBookActivity extends AppCompatActivity implements BaseClient, NavigationView.OnNavigationItemSelectedListener {
+public class ListBookActivity extends AppCompatActivity implements BaseService, NavigationView.OnNavigationItemSelectedListener {
     private static final String HISTORY_FILE = "history.txt";
     int start = 0, limit = 10, lastBookId = -1, lastStart = -1;
     List<Book> books = new ArrayList<>(), oldBooks = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ListBookActivity extends AppCompatActivity implements BaseClient, N
 
     Category category;
 
-    BookClient client;
+    BookService client;
 
     @BindView(R.id.search_field)
     EditText mSearchField;
@@ -106,7 +106,7 @@ public class ListBookActivity extends AppCompatActivity implements BaseClient, N
 
         }
 
-        client = retrofit.create(BookClient.class);
+        client = retrofit.create(BookService.class);
 
 //        loadLastStatus();
 
